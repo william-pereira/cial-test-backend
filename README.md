@@ -5,7 +5,7 @@ This project uses Cypress with the cypress-plugin-api to automate backend API te
 
 - Node.js (version 20 or higher)
 - NPM (version 10 or higher)
-- Docker
+- Docker (version 24 or higher)
 
 ## Installation
 Clone the repository:
@@ -44,7 +44,7 @@ npm install
 ### Cypress Plugin API
 - This plugin makes it easier to view request responses without the need to open inspect or check logs. With it, we can view an interface that displays responses, headers, queries, etc. It is very similar to the POSTMAN interface, for example.
 
-## Running the Tests
+#### Running the Tests
 
 To run the API tests, use the command:
 
@@ -65,3 +65,41 @@ The tests will be visible on the Cypress dashboard and can be run individually o
 - Best Practices: Each test is independent and can be run in isolation. This facilitates the maintenance and scalability of the project.
 - Structure Definition: There is also the possibility of using Cucumber, but this project was defined not to have complexity beyond the necessary. Therefore, Cucumber + BDD was not used here.
 - By default, the IDs of the Restful API are reserved and cannot be altered with PATCH/PUT/DELETE methods. Therefore, to test these methods, it was necessary to create a new ID through POST and then use it for the other methods. PS: There are tests in this repository that validate the response of attempts to change reserved IDs, also ensuring alternative scenarios.
+
+## Running Tests with Docker
+
+#### Prerequisites Docker
+
+- Make sure Docker is installed and running on your machine.
+
+#### Step by Step
+
+.1 Clone the Project Repository
+
+  ~~~bash
+  git clone https://github.com/william-pereira/cial-test-backend.git
+  cd cial-test-backend
+  ~~~
+
+.2 Build the Docker Image
+
+  ~~~bash
+  docker build -t cial-test:1.0.0 .
+  ~~~
+
+.3 Run the Tests in the Container
+
+Depending on your operating system, use the appropriate command to mount the current directory as a volume in the container:
+
+- For Linux 
+
+~~~bash
+docker run -i -v "$PWD:/cial-test-backend" cial-test-backend:1.0.0 --spec "/cial-test/cypress/e2e/DeviceService/*.js
+~~~
+
+- For Windows
+
+~~~bash
+docker run -i -v "%CD%:/cial-test-backend" cial-test-backend:1.0.0 --spec "/cial-test/cypress/e2e/DeviceService/*.js
+~~~
+
