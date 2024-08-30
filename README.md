@@ -74,20 +74,20 @@ The tests will be visible on the Cypress dashboard and can be run individually o
 
 #### Step by Step
 
-.1 Clone the Project Repository
+1. Clone the Project Repository
 
   ~~~bash
   git clone https://github.com/william-pereira/cial-test-backend.git
   cd cial-test-backend
   ~~~
 
-.2 Build the Docker Image
+2. Build the Docker Image
 
   ~~~bash
   docker build -t cial-test:1.0.0 .
   ~~~
 
-.3 Run the Tests in the Container
+3. Run the Tests in the Container
 
 Depending on your operating system, use the appropriate command to mount the current directory as a volume in the container:
 
