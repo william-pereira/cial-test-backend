@@ -3,12 +3,14 @@
 describe("/GET By Id successfully scenarios (Contract test)", () => {
     it("Validate Get By Id with more than one device id", () => {
 
-        cy.fixture('api/queryParams/getByIds.json').then((GetByIds) => { 
+        cy.fixture('api/queryParams/getByIds.json').then((getByIds) => { 
+            const ids = getByIds.id
+            const queryString = ids.map(id => `id=${id}`).join('&');
         cy.log('Send three ids to get by id')
         cy.api({
             method: 'GET',
-            url: `${"/objects"}`,
-            qs: GetByIds
+            url: `/objects?${queryString}`,
+            timeout: 60000
         }).then((response) => {
                 // validate status code
                 expect(response.status).to.equal(200);
