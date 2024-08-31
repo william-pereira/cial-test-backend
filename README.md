@@ -78,8 +78,13 @@ The tests will be visible on the Cypress dashboard and can be run individually o
 
   ~~~bash
   git clone https://github.com/william-pereira/cial-test-backend.git
-  cd cial-test-backend
   ~~~
+
+Access the Repository
+
+ ~~~bash
+ cd cial-test-backend
+ ~~~
 
 2. Build the Docker Image
 
@@ -94,12 +99,17 @@ Depending on your operating system, use the appropriate command to mount the cur
 - For Linux 
 
 ~~~bash
-docker run -i -v "$PWD:/cial-test-backend" cial-test-backend:1.0.0 --spec "/cial-test/cypress/e2e/DeviceService/*.js
+docker run -i -v "$PWD:/cial-test-backend" -t cial-test-backend:1.0.0 --spec "/cial-test/cypress/e2e/DeviceService/*.js"
 ~~~
 
 - For Windows
 
 ~~~bash
-docker run -i -v "%CD%:/cial-test-backend" cial-test-backend:1.0.0 --spec "/cial-test/cypress/e2e/DeviceService/*.js
+docker run -i -v "${PWD}:/cial-test-backend" -t cial-test:1.0.0 --spec "cypress/e2e/DeviceService/*.js"
 ~~~
 
+- For Mac
+
+~~~bash
+docker run -i -v `$(PWD)`:/cial-test-backend -t cial-test:1.0.0 --spec 'cypress/e2e/DeviceService/*.js'
+~~~
